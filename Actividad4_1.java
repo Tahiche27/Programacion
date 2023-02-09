@@ -22,7 +22,6 @@ public class Actividad4_1 {
                 
                 File fichero = new File("informe.txt");
                 Scanner scan = new Scanner(fichero);
-                
                 String linea = new String();
 
                 
@@ -73,6 +72,8 @@ public class Actividad4_1 {
             String correo = scan.nextLine();
                     
             personas.add(new Persona(nombre, apellidos, anyo, correo, id_per));
+
+            scan.close();
 
     }
 
@@ -129,7 +130,7 @@ public class Actividad4_1 {
 
 
         }
-
+        scan.close();
     }
 
 //Funcion que crea el archivo con los datos impresos de las personas ingresadas. 
@@ -284,6 +285,6 @@ fichero2.close();
 
         }while(opcion!= 5);
         
-        
+        scan.close();
     }
 }
