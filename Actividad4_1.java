@@ -147,7 +147,7 @@ public class Actividad4_1 {
 
 
         }
-
+        scan.close();
     }
 
 //Funcion que crea el archivo con los datos impresos de las personas ingresadas. 
