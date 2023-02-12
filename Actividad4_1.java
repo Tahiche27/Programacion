@@ -4,6 +4,7 @@
 import java.util.Scanner;
 import java.io.File;
 import MisClases.Persona;
+import MisClases.PersonaException;
 import java.util.ArrayList;
 import java.io.FileWriter;
 
@@ -22,7 +23,6 @@ public class Actividad4_1 {
                 
                 File fichero = new File("informe.txt");
                 Scanner scan = new Scanner(fichero);
-                
                 String linea = new String();
 
                 
@@ -34,8 +34,6 @@ public class Actividad4_1 {
                 personas.add(new Persona(propiedades[0].trim(), propiedades[1].trim(), Integer.parseInt(propiedades[2].trim()), propiedades[3].trim(), Integer.parseInt(propiedades[4].trim())));
             
             }
-           
-           scan.close();
         
         }catch(Exception ex){
         
@@ -48,6 +46,7 @@ public class Actividad4_1 {
 
     static void sumarPersona(){
 
+        try{
             Scanner scan = new Scanner(System.in);
 
             System.out.print("Dame el nombre de la persona: ");
@@ -62,9 +61,17 @@ public class Actividad4_1 {
             
             int anyo = scan.nextInt();
 
+            if(anyo < 0){
+                throw new PersonaException("El anyo no puede ser negativo");
+            }
+
             System.out.print("Dame el id de la persona: ");
             
             int id_per = scan.nextInt();
+            
+            if(id_per < 0){
+                throw new PersonaException("La id no puede ser negativa");
+            }
 
             System.out.print("Dame el correo de la persona: ");
             
@@ -74,7 +81,18 @@ public class Actividad4_1 {
                     
             personas.add(new Persona(nombre, apellidos, anyo, correo, id_per));
 
-    }
+        }catch(PersonaException e){
+
+            System.out.println(e.getMessage());
+
+        }catch(Exception e){
+            System.out.println("Formato de datos incorrecto: " + e.getMessage());
+
+        
+        }
+
+}
+
 
 
 //Creacion de la funcion listado.Imprime todos los datos del Array personas.
@@ -217,9 +235,16 @@ fichero2.close();
         System.out.println(menu);
 
         System.out.print("Seleccione la opcion: ");
+        
+        try{  
 
             opcion = scan.nextInt();
 
+        }catch(Exception e){
+
+            System.out.print(e.getMessage());
+            opcion = 6;
+        }
 
         switch(opcion){
 
@@ -227,11 +252,7 @@ fichero2.close();
 //Opcion de agregar persona.
 
             case 1:
-
                 sumarPersona();
-
-
-
 
                  break;
 
@@ -284,6 +305,6 @@ fichero2.close();
 
         }while(opcion!= 5);
         
-        
+        scan.close();
     }
 }
